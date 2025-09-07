@@ -80,6 +80,7 @@ export const Login = async(req:SessionInterface , res:Response) =>{
                 }
             }
         )
+        console.log(refreshToken,accessToken)
         res.cookie('accessToken',accessToken,getCookiesOptions('at'))
         res.cookie('refreshToken', refreshToken,getCookiesOptions('rt'))
         res.json({
