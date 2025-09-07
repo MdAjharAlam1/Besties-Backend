@@ -9,7 +9,15 @@ import { createServer } from 'http'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { Server } from 'socket.io'
-import CorsConfig from './utils/cors'
+// import CorsConfig from './utils/cors'
+const CorsConfig = {
+    origin : process.env.CLIENT,
+    methods: ["GET","POST","PUT","DELETE"],
+    credentials : true,
+    allowedHeaders:["Content-Type","Authorization"]
+}
+
+export default CorsConfig
 
 
 
@@ -33,7 +41,9 @@ VideoScoket(io)
 
 
 // Middlewares
-app.use(cors(CorsConfig))
+app.use(cors({
+    
+}))
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
