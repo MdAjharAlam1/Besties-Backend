@@ -25,17 +25,20 @@ const generateToken = async(payload : PayloadInterface) =>{
     }
 }
 
-const getCookiesOptions = (tokenType:TokenType) =>{
-    return {
-        httpOnly:true,
-        maxAge: tokenType === "at" ? accessTokenExpiresInTenMinutes : refreshTokenExpiresInSevenDays,
-        secure:process.env.NODE_ENV === "dev" ? false : true,
-        samesite:"none",
-        domain: process.env.NODE_ENV ==="dev" ? "localhost"  : process.env.CLIENT!.split("//").pop()
-
-    }
-    
-}
+const getCookiesOptions = (tokenType: TokenType) => {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "dev" ? false : true, // true on Vercel
+    sameSite: "None" as const, // correct key
+    path: "/", // always set path
+    maxAge:
+      tokenType === "at"
+        ? accessTokenExpiresInTenMinutes
+        : refreshTokenExpiresInSevenDays,
+    // ❌ Don't set domain unless you own a parent domain
+    // domain: "besties.vercel.app" // only if backend & frontend share same root
+  };
+};
 
 export const Signup = async(req:Request , res:Response)=>{
     try {
