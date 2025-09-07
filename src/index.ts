@@ -10,14 +10,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { Server } from 'socket.io'
 // import CorsConfig from './utils/cors'
-const CorsConfig = {
-    origin : process.env.CLIENT,
-    methods: ["GET","POST","PUT","DELETE"],
-    credentials : true,
-    allowedHeaders:["Content-Type","Authorization"]
-}
 
-export default CorsConfig
 
 
 
@@ -33,7 +26,12 @@ import StatusSocket from './socket/status.socket'
 import ChatSocket from './socket/chat.socket'
 import VideoScoket from './socket/video.socket'
 
-const io = new Server(server, {cors : CorsConfig})
+const io = new Server(server, {cors : {
+    origin : process.env.CLIENT,
+    methods: ["GET","POST","PUT","DELETE"],
+    credentials : true,
+    allowedHeaders:["Content-Type","Authorization"]
+}})
 StatusSocket(io)
 ChatSocket(io)
 VideoScoket(io)
@@ -42,7 +40,10 @@ VideoScoket(io)
 
 // Middlewares
 app.use(cors({
-    
+    origin : process.env.CLIENT,
+    methods: ["GET","POST","PUT","DELETE"],
+    credentials : true,
+    allowedHeaders:["Content-Type","Authorization"]
 }))
 app.use(cookieParser())
 app.use(express.json())

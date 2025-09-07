@@ -12,7 +12,7 @@ const http_1 = require("http");
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const socket_io_1 = require("socket.io");
-const cors_2 = __importDefault(require("./utils/cors"));
+// import CorsConfig from './utils/cors'
 const app = (0, express_1.default)();
 const server = (0, http_1.createServer)(app);
 server.listen(process.env.PORT || 8080, () => {
@@ -22,12 +22,22 @@ server.listen(process.env.PORT || 8080, () => {
 const status_socket_1 = __importDefault(require("./socket/status.socket"));
 const chat_socket_1 = __importDefault(require("./socket/chat.socket"));
 const video_socket_1 = __importDefault(require("./socket/video.socket"));
-const io = new socket_io_1.Server(server, { cors: cors_2.default });
+const io = new socket_io_1.Server(server, { cors: {
+        origin: process.env.CLIENT,
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+        allowedHeaders: ["Content-Type", "Authorization"]
+    } });
 (0, status_socket_1.default)(io);
 (0, chat_socket_1.default)(io);
 (0, video_socket_1.default)(io);
 // Middlewares
-app.use((0, cors_1.default)(cors_2.default));
+app.use((0, cors_1.default)({
+    origin: process.env.CLIENT,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
