@@ -1,0 +1,62 @@
+{
+  "entity": "event",
+  "account_id": "acc_Olfaibht8NYJKY",
+  "event": "payment.captured",
+  "contains": [
+    "payment"
+  ],
+  "payload": {
+    "payment": {
+      "entity": {
+        "id": "pay_RD2F0t4gh1BGeA",
+        "entity": "payment",
+        "amount": 50000,
+        "currency": "INR",
+        "status": "captured",
+        "order_id": "order_RD2EiTepnhZhCZ",
+        "invoice_id": null,
+        "international": false,
+        "method": "card",
+        "amount_refunded": 0,
+        "refund_status": null,
+        "captured": true,
+        "description": null,
+        "card_id": "card_RD2F15shKoP9bS",
+        "card": {
+          "id": "card_RD2F15shKoP9bS",
+          "entity": "card",
+          "name": "",
+          "last4": "8228",
+          "network": "MasterCard",
+          "type": "credit",
+          "issuer": "HDFC",
+          "international": false,
+          "emi": true,
+          "sub_type": "business",
+          "token_iin": null
+        },
+        "bank": null,
+        "wallet": null,
+        "vpa": null,
+        "email": "abc@example.com",
+        "contact": "+918888888888",
+        "notes": [],
+        "fee": 1500,
+        "tax": 0,
+        "error_code": null,
+        "error_description": null,
+        "error_source": null,
+        "error_step": null,
+        "error_reason": null,
+        "acquirer_data": {
+          "auth_code": "179406"
+        },
+        "emi_plan": null,
+        "created_at": 1756882055,
+        "reward": null,
+        "base_amount": 50000
+      }
+    }
+  },
+  "created_at": 1756882062
+}
